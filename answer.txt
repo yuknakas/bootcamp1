@@ -1,0 +1,43 @@
+Q1: What does make do?
+Make reads the Makefile, and executes the upmost command placed in it,
+unless given an argument.
+When given an argument, such as "make all", it will look for the "all"
+in the Makefile and execute it.
+The Makefile is useful to shorten commands that need to be written in the
+bash shell, and is often used for repetitive actions.
+
+Such examples include make all -> compile the code,
+make clean -> clean any files made by make all, and more.
+My having several options in the Makefile, we can also compile only certain
+parts of the src code, instead of all, easily.
+
+Another utilizy that the Makefile provides, is the ability to check on dependencies.
+For example, if we have
+all: $(OBJS)
+	....
+%.o: %.c
+	....
+Then when executing "all", make will check on the objects defined by OBJS,
+and check on the time that they were last updated, also with each c file corresponding to the
+object file. This comes in handy when compiling a huge code, but only a small portion has
+been updated, as only the updates ones will be compiled.
+
+----------------------------------------------------------------------------------------------------------
+Q2: What is the result of this command?
+
+Dump of assembler code for function main:
+   0x00000000004011c8 <+0>:     push   %rbx
+   0x00000000004011c9 <+1>:     sub    $0x10,%rsp
+   0x00000000004011cd <+5>:     jmp    0x40121a <main+82>
+   0x00000000004011cf <+7>:     mov    $0x40202e,%edi
+   0x00000000004011d4 <+12>:    call   0x401030 <puts@plt>
+   0x00000000004011d9 <+17>:    mov    0x2e50(%rip),%rdi        # 0x404030 <stdin@GLIBC_2.2.5>
+   0x00000000004011e0 <+24>:    call   0x401060 <getc@plt>
+   0x00000000004011e5 <+29>:    cmp    $0xa,%eax
+   0x00000000004011e8 <+32>:    je     0x40121a <main+82>
+   0x00000000004011ea <+34>:    cmp    $0xffffffff,%eax
+   0x00000000004011ed <+37>:    jne    0x4011d9 <main+17>
+   0x00000000004011ef <+39>:    mov    $0x40206f,%edi
+   0x00000000004011f4 <+44>:    call   0x401030 <puts@plt>
+   0x00000000004011f9 <+49>:    mov    $0x0,%eax
+   0x00000000004011fe <+54>:    add    $0x10,%rsp
